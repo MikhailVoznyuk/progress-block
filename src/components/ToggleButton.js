@@ -1,6 +1,6 @@
 import { createEl } from "../shared/utils/createEl.js"
 
-export function ToggleButton({checked=false, label='',  onChange} = {}) {
+export function ToggleButton({checked=false, label='',  onChange}) {
 
     const input = createEl('input',
         {
@@ -24,7 +24,6 @@ export function ToggleButton({checked=false, label='',  onChange} = {}) {
         el,
         mount(container) {
             container.appendChild(el);
-            return this;
         },
         destroy() {
             input.removeEventListener('change', handler);

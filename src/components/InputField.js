@@ -1,6 +1,6 @@
 import { createEl } from "../shared/utils/createEl.js";
 
-export function InputField({value=0, label='', min=0, max=100, onInput} = {}) {
+export function InputField({value=0, label='', min=0, max=100, onInput}) {
     const input = createEl('input',
         {
             className: 'field__input',
