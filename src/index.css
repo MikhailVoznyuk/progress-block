@@ -64,6 +64,11 @@ body {
     transform: translateX(calc(44px - 4px - 24px));
 }
 
+.togle__input:focus-visible + .toggle__slider {
+
+    outline: 2px solid #005DFF;
+    outline-offset: 2px;
+}
 
 
 
