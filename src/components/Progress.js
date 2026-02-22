@@ -35,7 +35,7 @@ class Progress {
         // clamp здесь по той же причине что и в конструкторе
         this.progress = clampPercent(progress);
         console.log(this.progress);
-        this.el.style.setProperty('--p', String(this.progress));
+        this.ring.style.setProperty('--p', String(this.progress));
     }
 
     setAnimating(animating) {
