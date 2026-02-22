@@ -1,5 +1,6 @@
 import { ToggleButton } from "./components/ToggleButton.js";
 import { InputField } from "./components/InputField.js";
+import { Progress } from "./components/Progress.js";
 import { createEl } from "./shared/utils/createEl.js";
 import { clampPercent } from "./shared/utils/clampPercent.js";
 
@@ -7,7 +8,7 @@ class App {
     constructor(root) {
         this.root = root;
         this.state = {
-            value: 0,
+            progress: 0,
             animating: false,
             hidden: false
         }
@@ -16,32 +17,32 @@ class App {
         this._mountComponents();
     }
 
-    setValue(value) {
-        if (value === null) return;
+    setProgress(progress) {
+        if (progress === null) return;
 
-        this.state.value = clampPercent(value);
-        // обновить стейт Progress
-        this._syncUI();
+        this.state.progress = clampPercent(progress);
+        this.progressBlock.setProgress(this.state.progress);
+        this._syncControls();
     }
 
     setAnimating(animating) {
         this.state.animating = !!animating;
-        
-        // обновить стейт Progress
-        this._syncUI();
+        this.progressBlock.setAnimating(this.state.animating);
+        this._syncControls();
     }
 
     setHidden(hidden) {
         this.state.hidden = !!hidden;
-
-        // обновить стейт Progress
-        this._syncUI();
+        this.progressBlock.setHidden(this.state.hidden);
+        this._syncControls();
     }
 
     destroy() {
         this.root.textContent = '';
-
-        //Дальнейшая очистка компонентов
+        this.progressBlock.destroy();
+        this.progressInput.destroy();
+        this.animatedToggle.destroy();
+        this.hiddenToggle.destroy();
     }
 
    
@@ -92,12 +93,21 @@ class App {
     }
 
     _mountComponents() {
-        this.valueInput = InputField({
-            value: this.state.value,
+
+        this.progressBlock = new Progress({
+            progress: this.state.progress,
+            animating: this.state.animating,
+            hidden: this.state.hidden,
+            size: 120,
+            stroke: 10 
+        });
+
+        this.progressInput = InputField({
+            progress: this.state.progress,
             label: 'Value',
             min: 0,
             max: 100,
-            onInput: (value) => this.setValue(value)
+            onInput: (progress) => this.setProgress(progress)
         });
 
         this.animatedToggle = ToggleButton({
@@ -112,14 +122,14 @@ class App {
             onChange: (hidden) => this.setHidden(hidden)
         });
 
-        this.valueInput.mount(this.controlsSlotEl);
+        this.progressBlock.mount(this.progressSlotEl);
+        this.progressInput.mount(this.controlsSlotEl);
         this.animatedToggle.mount(this.controlsSlotEl);
         this.hiddenToggle.mount(this.controlsSlotEl);
     }
 
-     _syncUI() {
-        console.log(this.state.animating)
-        this.valueInput.setValue(this.state.value);
+     _syncControls() {
+        this.progressInput.setValue(this.state.progress);
         this.animatedToggle.setChecked(this.state.animating);
         this.hiddenToggle.setChecked(this.state.hidden);
     }
