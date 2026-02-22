@@ -1,0 +1,162 @@
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 568px;
+    padding: 20px;
+    margin: auto;
+}
+
+
+.app__label {
+    font-size: 28px;
+}
+
+.app__top {
+    width: 100%;
+    
+}
+
+.app__body {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+
+}
+
+.app__col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+    
+}
+
+.toggle {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+}
+
+.toggle__input {
+    position:absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.toggle__slider {
+    position: relative;
+    display: block;
+    width: 44px;
+    height: 28px;
+    border-radius: 14px;
+    background-color: #DFE6F0;
+    transition: 0.3s ease;
+}
+
+.toggle__slider:after {
+    content: '';
+    position: absolute; 
+    width: 24px;
+    height: 24px;
+    top: 2px;
+    left: 2px;
+    background-color: #FFF;
+    border-radius: 50%;
+    transition: 0.3s ease-in-out;
+}
+
+.toggle__input:checked + .toggle__slider {
+    background-color: #005DFF;
+}
+
+.toggle__input:checked + .toggle__slider:after {
+    transform: translateX(calc(44px - 4px - 24px));
+}
+
+.togle__input:focus-visible + .toggle__slider {
+
+    outline: 2px solid #005DFF;
+    outline-offset: 2px;
+}
+
+.field {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.field__input {
+    width: 44px;
+    height: 28px;
+    border-radius: 28px;
+    border: 2px solid #000;
+    text-align: center;
+
+}
+
+.field__input::-webkit-outer-spin-button,
+.field__input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.field__input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: none;
+}
+
+@property --p {
+    syntax: "<number>";
+    inherits: false;
+    initial-value: 0;
+}
+
+.progress {
+    --size: 120px;
+    --stroke: 10px;
+    position: relative;
+    width: var(--size);
+    height: var(--size);
+}
+
+.progress__center {
+    position: absolute;
+    inset: var(--stroke);
+    background-color: #FFF;
+    border-radius: 50%;
+}
+
+.progress__ring {
+    --p: 0;
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(#005DFF calc(var(--p) * 1%), #EEF3F6 0);
+    transition: --p 300ms ease-in-out;
+}
+
+.progress--hidden {
+    display: none;
+}
+
+.progress--animated {
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
