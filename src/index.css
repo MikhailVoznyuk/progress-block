@@ -70,5 +70,30 @@ body {
     outline-offset: 2px;
 }
 
+.field {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.field__input {
+    width: 44px;
+    height: 28px;
+    border-radius: 28px;
+    border: 2px solid #000;
+    text-align: center;
+
+}
+
+.field__input::-webkit-outer-spin-button,
+.field__input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.field__input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: none;
+}
 
 
