@@ -1,42 +1,67 @@
-
+* {
+    box-sizing: border-box;
+}
 body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    display: grid;
+    place-items: center;
 }
 
 .app {
+    --pad: 14px;
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 568px;
-    padding: 20px;
-    margin: auto;
-}
-
-
-.app__label {
-    font-size: 28px;
+    width: 234px;
+    padding: var(--pad);
 }
 
 .app__top {
+    display: flex;
+    align-items: center;
     width: 100%;
-    
+    margin-bottom: 20px;
 }
+
+.app__label {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+}
+
+
+
 
 .app__body {
     display: flex;
+    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    gap: 40px;
-
+    width: 100%;
+    height: 100%;
 }
 
 .app__col {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    gap: 20px;
+    align-items: center; 
+    width: 234px;   
+    height: 168px  
+}
 
-    
+.app__controls {
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.app__control {
+    padding: 0;
 }
 
 .toggle {
@@ -57,8 +82,8 @@ body {
 .toggle__slider {
     position: relative;
     display: block;
-    width: 44px;
-    height: 28px;
+    width: 38px;
+    height: 24px;
     border-radius: 14px;
     background-color: #DFE6F0;
     transition: 0.3s ease;
@@ -67,8 +92,8 @@ body {
 .toggle__slider:after {
     content: '';
     position: absolute; 
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     top: 2px;
     left: 2px;
     background-color: #FFF;
@@ -81,10 +106,10 @@ body {
 }
 
 .toggle__input:checked + .toggle__slider:after {
-    transform: translateX(calc(44px - 4px - 24px));
+    transform: translateX(calc(38px - 4px - 20px));
 }
 
-.togle__input:focus-visible + .toggle__slider {
+.toggle__input:focus-visible + .toggle__slider {
 
     outline: 2px solid #005DFF;
     outline-offset: 2px;
@@ -97,12 +122,12 @@ body {
 }
 
 .field__input {
-    width: 44px;
-    height: 28px;
+    font-size: 12px;
+    width: 38px;
+    height: 24px;
     border-radius: 28px;
-    border: 2px solid #000;
+    border: 1px solid #000;
     text-align: center;
-
 }
 
 .field__input::-webkit-outer-spin-button,
@@ -123,8 +148,8 @@ body {
 }
 
 .progress {
-    --size: 120px;
-    --stroke: 10px;
+    --size: 100px;
+    --stroke: 8px;
     position: relative;
     width: var(--size);
     height: var(--size);
@@ -150,7 +175,7 @@ body {
     display: none;
 }
 
-.progress--animated {
+.progress--animated .progress__ring {
     animation: spin 1s ease-in-out infinite;
 }
 
@@ -160,3 +185,50 @@ body {
     }
 }
 
+
+@media (orientation: landscape) {
+    .app {
+        width: 568px;
+        height: 320px;
+        --pad: 20px;
+    }
+
+    .app__top {
+        position: absolute;
+        top: var(--pad);
+        left: var(--pad);
+    }
+
+    .app__body {
+        flex-direction: row;
+    }
+
+    .app__col {
+        width: 200px;
+    }
+
+    .toggle__slider {
+        width: 44px;
+        height: 28px;
+    }
+
+    .toggle__slider:after {
+        width: 24px;
+        height: 24px;
+    }
+
+    .toggle__input:checked + .toggle__slider:after {
+        transform: translateX(calc(44px - 4px - 24px));
+    }
+
+    .field__input {
+        font-size: 12px;
+        width: 44px;
+        height: 28px;
+    }
+
+    .progress {
+        --size: 120px;
+        --stroke: 10px;
+    }
+}
