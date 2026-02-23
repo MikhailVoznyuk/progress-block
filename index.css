@@ -176,7 +176,7 @@ body {
 }
 
 .progress--animated .progress__ring {
-    animation: spin 1s ease-in-out infinite;
+    animation: spin 1.4s ease-in-out infinite;
 }
 
 @keyframes spin {
