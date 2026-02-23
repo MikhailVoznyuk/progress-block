@@ -98,13 +98,13 @@ class App {
     _mountComponents() {
 
         this.progressBlock = new Progress({
-            value: this.state.progress,
+            progress: this.state.progress,
             animating: this.state.animating,
             hidden: this.state.hidden,
         });
 
         this.progressInput = InputField({
-            progress: this.state.progress,
+            value: this.state.progress,
             label: 'Value',
             min: 0,
             max: 100,
@@ -119,7 +119,7 @@ class App {
 
         this.hiddenToggle = ToggleButton({
             checked: this.state.hidden,
-            label: 'Hidden',
+            label: 'Hide',
             onChange: (hidden) => this.setHidden(hidden)
         });
 
