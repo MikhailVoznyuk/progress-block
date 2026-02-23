@@ -18,7 +18,9 @@ class App {
     }
 
     setProgress(progress) {
-        if (progress === null) return;
+        if (progress === null) {
+            progress = 0;
+        }
 
         this.state.progress = clampPercent(progress);
         this.progressBlock.setProgress(this.state.progress);
@@ -43,9 +45,7 @@ class App {
         this.progressInput.destroy();
         this.animatedToggle.destroy();
         this.hiddenToggle.destroy();
-    }
-
-   
+    }   
 
     _buildLayout() {
         const appTop = createEl('div', 
@@ -67,7 +67,7 @@ class App {
         const controlsSlot = createEl(
             'div', 
             {
-                className: 'app__col',
+                className: 'app__controls',
                 data: {'slot': 'controls'}
             }
         )
@@ -75,7 +75,10 @@ class App {
         const appBody = createEl('div', 
             {className: 'app__body'},
             progressSlot, 
-            controlsSlot
+            createEl('div',
+                {className: 'app__col'},
+                controlsSlot
+            )   
         )
 
         const layout = createEl('section',
@@ -95,11 +98,9 @@ class App {
     _mountComponents() {
 
         this.progressBlock = new Progress({
-            progress: this.state.progress,
+            value: this.state.progress,
             animating: this.state.animating,
             hidden: this.state.hidden,
-            size: 120,
-            stroke: 10 
         });
 
         this.progressInput = InputField({
