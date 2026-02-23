@@ -6,7 +6,8 @@ export function ToggleButton({checked=false, label='',  onChange}) {
         {
             className: 'toggle__input',
             type: 'checkbox',
-            checked: !!checked
+            checked: !!checked,
+            name: 'toggler'
         }
     )
 
@@ -14,7 +15,7 @@ export function ToggleButton({checked=false, label='',  onChange}) {
     input.addEventListener('change', handler);
 
     const el = createEl('label', 
-        {className: 'toggle'},
+        {className: 'app__control toggle'},
         input,
         createEl('span', {className: 'toggle__slider'}),
         (label) ? createEl('span', {className: 'toggle__label'}, label) : null

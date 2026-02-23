@@ -2,7 +2,13 @@ import { createEl } from "../shared/utils/createEl.js";
 import { clampPercent } from "../shared/utils/clampPercent.js";
 
 class Progress {
-    constructor({progress = 0, animating = false, hidden = false, size = 120, stroke = 10}) {
+    constructor({progress = 0, animating = false, hidden = false, size, stroke}) {
+        /* 
+            size - общий размер блока, stroke - ширина динамической дуги. 
+            Оставлены для поддержки кастомных значений размеров, 
+            Важно: указание этих пропсов перетирает логику адаптива
+        */
+
         // clamp уже используется в App, но дублируется здесь на случай если компонент будет использоваться вне App
         this.progress = clampPercent(progress);
         this.animating = !!animating;
@@ -23,8 +29,14 @@ class Progress {
         this.ring = ring;
         this.center = center;
 
-        this.el.style.setProperty('--size', `${this.size}px`);
-        this.el.style.setProperty('--stroke', `${this.stroke}px`);
+        if (this.size != null) {
+            this.el.style.setProperty('--size', `${this.size}px`);
+        }
+      
+        if (this.stroke != null) {
+            this.el.style.setProperty('--stroke', `${this.stroke}px`);
+        }
+
 
         this.setProgress(this.progress);
         this.setAnimating(this.animating);
@@ -32,9 +44,8 @@ class Progress {
     }
 
     setProgress(progress) {
-        // clamp здесь по той же причине что и в конструкторе
+        // clamp здесь по той же причине, что и в конструкторе
         this.progress = clampPercent(progress);
-        console.log(this.progress);
         this.ring.style.setProperty('--p', String(this.progress));
     }
 

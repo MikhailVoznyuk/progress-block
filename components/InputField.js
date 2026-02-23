@@ -3,7 +3,7 @@ import { createEl } from "../shared/utils/createEl.js";
 export function InputField({value=0, label='', min=0, max=100, onInput}) {
     const input = createEl('input',
         {
-            className: 'field__input',
+            className: 'app__control field__input',
             type: 'number',
             min: String(min),
             max: String(max),
@@ -14,7 +14,8 @@ export function InputField({value=0, label='', min=0, max=100, onInput}) {
 
     const el = createEl('label', 
         {
-            className: 'field'
+            className: 'field',
+            name: 'number_input'
         },
         input,
         (label) ? createEl('span', {className: 'field__label'}, label) : null
