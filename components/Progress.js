@@ -6,7 +6,7 @@ class Progress {
         /* 
             size - общий размер блока, stroke - ширина динамической дуги. 
             Оставлены для поддержки кастомных значений размеров, 
-            Важно: указание этих просов перетирает логику адаптива
+            Важно: указание этих пропсов перетирает логику адаптива
         */
 
         // clamp уже используется в App, но дублируется здесь на случай если компонент будет использоваться вне App
@@ -46,7 +46,6 @@ class Progress {
     setProgress(progress) {
         // clamp здесь по той же причине, что и в конструкторе
         this.progress = clampPercent(progress);
-        console.log(this.progress);
         this.ring.style.setProperty('--p', String(this.progress));
     }
 
